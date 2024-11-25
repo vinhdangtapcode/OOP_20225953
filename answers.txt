@@ -1,0 +1,39 @@
+1. So sánh với phương thức nhận tham số mảng
+
+Phương thức với đối số tùy ý:
++ Truyền trực tiếp các đối tượng DigitalVideoDisc mà không cần tạo mảng.
+Cú pháp gọn gàng, trực quan hơn khi truyền nhiều đối số.
++ Linh hoạt hơn vì cho phép truyền từ 0 đến bất kỳ số lượng đối tượng nào.
+Nếu không có đĩa nào được truyền vào, mảng dvdList trong phương thức sẽ là một mảng rỗng (không gây lỗi).
++ Dùng khi số lượng đối tượng được truyền vào là ngẫu nhiên hoặc ít.
+
+Phương thức với mảng:
++ Yêu cầu tạo mảng trước khi truyền vào phương thức.
+Phức tạp hơn khi sử dụng, đặc biệt khi số lượng đối số nhỏ.
++ Bắt buộc người dùng phải cung cấp một mảng, ngay cả khi mảng đó trống.
++ Dùng khi đã có sẵn một danh sách đĩa được lưu trong một mảng.
+
+
+
+2. Is JAVA a Pass by Value or a Pass by Reference programming language? 
+
+Trong phương thức swap(Object o1, Object o2):
+o1 nhận bản sao của tham chiếu jungleDVD.
+o2 nhận bản sao của tham chiếu cinderellaDVD.
+Khi thực hiện phép gán o1 = o2 và o2 = tmp trong phương thức, ta chỉ thay đổi giá trị của các tham số bản sao (o1 và o2) bên trong phương thức.
+Tham chiếu gốc (jungleDVD và cinderellaDVD trong phương thức main) không bị ảnh hưởng bởi việc gán này.
+
+Với phương thức changeTitle:
+Tham chiếu dvd (bản sao của jungleDVD) trỏ đến cùng đối tượng với jungleDVD. Thay đổi thuộc tính của đối tượng qua dvd sẽ được phản ánh ở jungleDVD.
+Nhưng việc gán dvd trỏ đến một đối tượng mới không ảnh hưởng đến jungleDVD trong phương thức main.
+
+Vì vậy: JAVA is a Pass by Value programming language.
+
+Phương thức hoán đổi title 2 đối tượng:
+ 	public static void swap(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+    		String tempTitle = dvd1.getTitle();
+    		dvd1.setTitle(dvd2.getTitle());
+    		dvd2.setTitle(tempTitle);
+	}
+
+3. Phương thức toString() sẽ trả về một chuỗi mô tả thông tin của DVD (tiêu đề, thể loại, đạo diễn, độ dài và giá).
