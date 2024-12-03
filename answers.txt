@@ -1,39 +1,19 @@
-1. So sánh với phương thức nhận tham số mảng
-
-Phương thức với đối số tùy ý:
-+ Truyền trực tiếp các đối tượng DigitalVideoDisc mà không cần tạo mảng.
-Cú pháp gọn gàng, trực quan hơn khi truyền nhiều đối số.
-+ Linh hoạt hơn vì cho phép truyền từ 0 đến bất kỳ số lượng đối tượng nào.
-Nếu không có đĩa nào được truyền vào, mảng dvdList trong phương thức sẽ là một mảng rỗng (không gây lỗi).
-+ Dùng khi số lượng đối tượng được truyền vào là ngẫu nhiên hoặc ít.
-
-Phương thức với mảng:
-+ Yêu cầu tạo mảng trước khi truyền vào phương thức.
-Phức tạp hơn khi sử dụng, đặc biệt khi số lượng đối số nhỏ.
-+ Bắt buộc người dùng phải cung cấp một mảng, ngay cả khi mảng đó trống.
-+ Dùng khi đã có sẵn một danh sách đĩa được lưu trong một mảng.
+Question: Alternatively, to compare items in the cart, instead of using Comparator, we can use the Comparable interface and override the compareTo()method. You can refer to the Java docs to see the information of this interface. 
+Suppose we are taking this Comparable interface approach.
+-	What class should implement the Comparable interface?
+-	In those classes, how should you implement the compareTo()method be to reflect the ordering that we want?
+-	Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+-	Suppose the DVDs has a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
 
 
-
-2. Is JAVA a Pass by Value or a Pass by Reference programming language? 
-
-Trong phương thức swap(Object o1, Object o2):
-o1 nhận bản sao của tham chiếu jungleDVD.
-o2 nhận bản sao của tham chiếu cinderellaDVD.
-Khi thực hiện phép gán o1 = o2 và o2 = tmp trong phương thức, ta chỉ thay đổi giá trị của các tham số bản sao (o1 và o2) bên trong phương thức.
-Tham chiếu gốc (jungleDVD và cinderellaDVD trong phương thức main) không bị ảnh hưởng bởi việc gán này.
-
-Với phương thức changeTitle:
-Tham chiếu dvd (bản sao của jungleDVD) trỏ đến cùng đối tượng với jungleDVD. Thay đổi thuộc tính của đối tượng qua dvd sẽ được phản ánh ở jungleDVD.
-Nhưng việc gán dvd trỏ đến một đối tượng mới không ảnh hưởng đến jungleDVD trong phương thức main.
-
-Vì vậy: JAVA is a Pass by Value programming language.
-
-Phương thức hoán đổi title 2 đối tượng:
- 	public static void swap(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
-    		String tempTitle = dvd1.getTitle();
-    		dvd1.setTitle(dvd2.getTitle());
-    		dvd2.setTitle(tempTitle);
-	}
-
-3. Phương thức toString() sẽ trả về một chuỗi mô tả thông tin của DVD (tiêu đề, thể loại, đạo diễn, độ dài và giá).
+Answer: - Lớp Media nên implements Comparable interface vì Media là lớp cha chứa các thuộc tính chung dùng để sắp xếp, điều này đảm bảo tất cả các loại Media đều có thứ tự mặc định khi so sánh 
+- Cách implements ví dụ theo title như sau:
+public int compareTo(Media other) {
+    int titleComparison = this.getTitle().compareToIgnoreCase(other.getTitle());
+    if (titleComparison != 0) {
+        return titleComparison;
+    }
+    return Float.compare(other.getCost(), this.getCost());
+}
+- Không thể có 2 quy tắc sắp xếp khi sử dụng Comparable interface này.
+- Nếu DigitalVideoDisc cần quy tắc sắp xếp riêng (tiêu đề, độ dài giảm dần, giá), ta có thể ghi đè phương thức compareTo() trong lớp DigitalVideoDisc. 
