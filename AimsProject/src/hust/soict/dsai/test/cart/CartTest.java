@@ -1,29 +1,44 @@
 package hust.soict.dsai.test.cart;
+
 import hust.soict.dsai.aims.cart.Cart;
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.Book;
+import hust.soict.dsai.aims.media.CompactDisc;
+import hust.soict.dsai.aims.media.Track;
 
 public class CartTest {
 
     public static void main(String[] args) {
-        //Create a new cart
+        // Create a new cart
         Cart cart = new Cart();
 
-        //Create new dvd objects and add them to the cart
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
-        cart.addDigitalVideoDisc(dvd1);
+        cart.addMedia(dvd1);
 
         DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
-        cart.addDigitalVideoDisc(dvd2);
+        cart.addMedia(dvd2);
 
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
-        cart.addDigitalVideoDisc(dvd3);
+        cart.addMedia(dvd3);
 
-        //Test the print method
+        Book book = new Book("The Great Gatsby", "Classic", 10.99f);
+        cart.addMedia(book);
+
+        CompactDisc cd = new CompactDisc("Greatest Hits", "Music", "John Doe", 60, 19.99f, "Various Artists");
+        Track track1 = new Track("Track 1", 180);
+        Track track2 = new Track("Track 2", 200);
+        cd.addTrack(track1);
+        cd.addTrack(track2);
+        cart.addMedia(cd);
+
         cart.print();
-        //To-do: Test the search methods here
-        cart.searchById(2);
-        cart.searchById(4);
-        cart.searchByTitle("The Lion King");
-        cart.searchByTitle("Arigato");
+
+        System.out.println("\nSearching by ID:");
+        cart.searchById(2);  
+        cart.searchById(4);  
+
+        System.out.println("\nSearching by Title:");
+        cart.searchByTitle("The Lion King"); 
+        cart.searchByTitle("Arigato");  
     }
 }
